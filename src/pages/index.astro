@@ -1,11 +1,31 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import JsonDiffTool from '../components/tools/JsonDiffTool.tsx';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title="SiteOfTools — Fast, Private In-Browser Developer Utilities"
+  description="Compare JSON, format payloads, and convert formats with zero server tracking. 100% free client-side developer utility suite."
+  activeCategory="Developer"
+>
+  <!-- Main Interactive Island -->
+  <JsonDiffTool client:load />
+
+  <!-- Below-the-fold Static SEO Content -->
+  <section class="mt-16 border-t border-white/10 pt-10 grid grid-cols-1 md:grid-cols-2 gap-8 text-xs text-slate-400 leading-relaxed">
+    <div>
+      <h2 class="text-sm font-semibold text-white mb-2">How Does Client-Side JSON Diff Work?</h2>
+      <p>
+        SiteOfTools compares JSON structures using character-by-character and line-by-line diffing algorithms. 
+        Unlike traditional online converters that upload your data to remote backends, all operations run on your device's V8 JavaScript engine.
+      </p>
+    </div>
+    <div>
+      <h2 class="text-sm font-semibold text-white mb-2">Data Privacy & Zero Logs</h2>
+      <p>
+        We do not maintain databases or server-side logging mechanisms. Your JSON payloads, authentication tokens, 
+        and confidential debug logs remain secure inside your browser session.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
