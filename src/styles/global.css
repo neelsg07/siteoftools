@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   body {
-    background-color: #0c1222;
+    @apply transition-colors duration-200 antialiased font-sans min-h-screen text-neutral-900 dark:text-neutral-100;
   }
 }
 
-/* Custom Scrollbar for Code Terminals */
+/* Custom Scrollbars */
 textarea::-webkit-scrollbar,
 div::-webkit-scrollbar {
   width: 6px;
@@ -14,10 +16,10 @@ div::-webkit-scrollbar {
 }
 textarea::-webkit-scrollbar-thumb,
 div::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(150, 150, 150, 0.25);
   border-radius: 4px;
 }
 textarea::-webkit-scrollbar-thumb:hover,
 div::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(150, 150, 150, 0.45);
 }

@@ -8,74 +8,133 @@ interface Props {
 }
 
 const { title, description, activeCategory = 'Developer' } = Astro.props;
+
+const categories = [
+  { name: 'Developer', icon: '</>', href: '/' },
+  { name: 'Text', icon: 'T', href: '#' },
+  { name: 'Data', icon: '🗄️', href: '#' },
+  { name: 'Date & Time', icon: '📅', href: '#' },
+  { name: 'Math', icon: '🔢', href: '#' },
+  { name: 'Converter', icon: '⇄', href: '#' },
+];
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+
+    <!-- Theme Initialization Script (Zero Flicker) -->
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      })();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
   </head>
-  <body class="relative min-h-screen bg-[#0c1222] text-slate-100 selection:bg-emerald-500 selection:text-black">
+  <body class="relative min-h-screen selection:bg-neutral-900 selection:text-white dark:selection:bg-white dark:selection:text-black">
     
-    <!-- 1. Full-Width Scenic Hero Backdrop with Smooth Fade -->
-    <div class="absolute top-0 left-0 right-0 h-[620px] overflow-hidden pointer-events-none -z-10">
-      <!-- Background Image -->
+    <!-- 1. FIXED FULL-SCREEN SCENIC BACKGROUND (Never cuts off or reveals white gaps) -->
+    <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
       <img
         src="/images/hero-bg.webp"
-        alt="Atmospheric Landscape Background"
-        class="w-full h-full object-cover object-top opacity-65"
+        alt="Background"
+        class="w-full h-full object-cover object-center opacity-90 dark:opacity-30 transition-opacity duration-300"
         loading="eager"
         fetchpriority="high"
       />
-      <!-- Gradient Overlays to seamlessly blend into #0c1222 -->
-      <div class="absolute inset-0 bg-gradient-to-t from-[#0c1222] via-[#0c1222]/40 to-transparent"></div>
-      <div class="absolute inset-0 bg-gradient-to-b from-[#0c1222]/30 via-transparent to-[#0c1222]"></div>
+      <!-- Dynamic Tint Overlay: Soft airy mist in light mode, deep dark tint in dark mode -->
+      <div class="absolute inset-0 bg-white/40 dark:bg-slate-950/80 transition-colors duration-200"></div>
     </div>
 
     <!-- 2. Sticky Glass Header -->
     <header class="max-w-7xl mx-auto px-4 sm:px-6 pt-5">
-      <nav class="backdrop-blur-xl bg-slate-900/50 border border-white/10 rounded-2xl px-5 py-3 flex items-center justify-between shadow-2xl">
+      <nav class="backdrop-blur-xl bg-white/70 dark:bg-neutral-900/70 border border-neutral-200/80 dark:border-white/10 rounded-2xl px-5 py-3 flex items-center justify-between shadow-sm dark:shadow-2xl transition-colors">
         <div class="flex items-center gap-8">
-          <a href="/" class="flex items-center gap-2 font-bold text-lg tracking-tight text-white hover:text-emerald-400 transition-colors">
-            <span class="bg-white/10 p-1.5 rounded-lg text-emerald-400 font-mono text-sm">&lt;/&gt;</span>
+          <a href="/" class="flex items-center gap-2 font-bold text-lg tracking-tight text-neutral-900 dark:text-white">
+            <span class="bg-neutral-900 text-white dark:bg-white dark:text-black p-1.5 rounded-lg font-mono text-xs">&lt;/&gt;</span>
             SiteOfTools
           </a>
-          <div class="hidden md:flex items-center gap-6 text-xs font-medium text-slate-300">
-            <a href="/" class="hover:text-white transition-colors">Tools</a>
-            <a href="#" class="hover:text-white transition-colors">Categories</a>
-            <a href="#" class="hover:text-white transition-colors">Favorites</a>
-            <a href="#" class="hover:text-white transition-colors">About</a>
+
+          <div class="hidden md:flex items-center gap-6 text-xs font-medium text-neutral-600 dark:text-neutral-300">
+            <a href="/" class="hover:text-neutral-900 dark:hover:text-white transition-colors">Tools</a>
+            <a href="#" class="hover:text-neutral-900 dark:hover:text-white transition-colors">Categories</a>
+            <a href="#" class="hover:text-neutral-900 dark:hover:text-white transition-colors">About</a>
           </div>
         </div>
 
         <div class="flex items-center gap-3">
-          <div class="relative hidden sm:block">
-            <input
-              type="text"
-              placeholder="Search tools... (/)"
-              class="bg-slate-950/60 border border-white/10 rounded-xl px-3.5 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500/50 w-52"
-            />
-            <kbd class="absolute right-2.5 top-2 text-[10px] text-slate-500 bg-white/5 px-1.5 py-0.5 rounded border border-white/10">/</kbd>
-          </div>
-          <span class="text-[11px] font-mono bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-2.5 py-1 rounded-full">
-            🔒 Private
+          <!-- Theme Toggle Button -->
+          <button
+            id="theme-toggle"
+            aria-label="Toggle Theme"
+            class="p-2 rounded-xl border border-neutral-200 dark:border-white/10 bg-white/80 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 shadow-sm transition"
+          >
+            <span class="dark:hidden text-sm">☀️</span>
+            <span class="hidden dark:inline text-sm">🌙</span>
+          </button>
+
+          <span class="text-[11px] font-mono bg-neutral-900/5 dark:bg-white/10 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-white/15 px-2.5 py-1 rounded-full">
+            100% Client-Side
           </span>
         </div>
       </nav>
     </header>
 
-    <!-- 3. Dynamic Page Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
+    <!-- 3. Hero Title & Category Switcher -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-6 text-center">
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white mb-2">
+        Free Online Tools
+      </h1>
+      <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-6 max-w-lg mx-auto font-normal">
+        Simple, fast, and private. All utilities execute in your browser with zero data retention.
+      </p>
+
+      <!-- Category Filter Pills -->
+      <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
+        {categories.map((cat) => (
+          <a
+            href={cat.href}
+            class={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 border transition ${
+              cat.name === activeCategory
+                ? 'bg-neutral-900 text-white border-neutral-900 dark:bg-white dark:text-neutral-950 dark:border-white shadow-md'
+                : 'backdrop-blur-md bg-white/60 dark:bg-neutral-900/60 text-neutral-700 dark:text-neutral-300 border-neutral-200/80 dark:border-white/10 hover:bg-white/90 dark:hover:bg-neutral-800'
+            }`}
+          >
+            <span class="font-mono text-xs">{cat.icon}</span>
+            {cat.name}
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- 4. Main Tool Slot -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
       <slot />
     </main>
 
-    <!-- 4. Footer -->
-    <footer class="max-w-7xl mx-auto px-4 sm:px-6 py-8 border-t border-white/5 text-center text-xs text-slate-500">
-      <p>© {new Date().getFullYear()} SiteOfTools.com — 100% Client-Side In-Browser Developer Utility Suite.</p>
+    <footer class="max-w-7xl mx-auto px-4 sm:px-6 py-8 border-t border-neutral-200/60 dark:border-white/10 text-center text-xs text-neutral-500">
+      <p>© {new Date().getFullYear()} SiteOfTools.com — Pure client-side developer utilities.</p>
     </footer>
+
+    <!-- Theme Toggle Handler -->
+    <script is:inline>
+      const btn = document.getElementById('theme-toggle');
+      btn?.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    </script>
   </body>
 </html>
