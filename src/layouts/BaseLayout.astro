@@ -42,6 +42,7 @@ const categories = [
         document.documentElement.classList.remove('dark');
       }
     </script>
+    
   </head>
   <body class="relative min-h-screen selection:bg-neutral-900 selection:text-white dark:selection:bg-white dark:selection:text-black">
     
@@ -62,9 +63,23 @@ const categories = [
     <header class="max-w-7xl mx-auto px-4 sm:px-6 pt-5">
       <nav class="backdrop-blur-xl bg-white/70 dark:bg-neutral-900/70 border border-neutral-200/80 dark:border-white/10 rounded-2xl px-5 py-3 flex items-center justify-between shadow-sm dark:shadow-2xl transition-colors">
         <div class="flex items-center gap-8">
-          <a href="/" class="flex items-center gap-2 font-bold text-lg tracking-tight text-neutral-900 dark:text-white">
-            <span class="bg-neutral-900 text-white dark:bg-white dark:text-black p-1.5 rounded-lg font-mono text-xs">&lt;/&gt;</span>
-            SiteOfTools
+          <a href="/" class="flex items-center gap-2 focus:outline-none">
+            <!-- Light mode logo (hidden in dark mode) -->
+            <img 
+              src="/images/siteoftools-black.png" 
+              alt="SiteOfTools" 
+              class="h-7 w-auto block dark:hidden object-contain"
+              width="140"
+              height="32"
+            />
+            <!-- Dark mode logo (hidden in light mode) -->
+            <img 
+              src="/images/siteoftools-white.png" 
+              alt="SiteOfTools" 
+              class="h-7 w-auto hidden dark:block object-contain"
+              width="140"
+              height="32"
+            />
           </a>
 
           <div class="hidden md:flex items-center gap-6 text-xs font-medium text-neutral-600 dark:text-neutral-300">
@@ -125,6 +140,20 @@ const categories = [
     </main>
 
     <footer class="max-w-7xl mx-auto px-4 sm:px-6 py-8 border-t border-neutral-200/60 dark:border-white/10 text-center text-xs text-neutral-500">
+      <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+    
+        <div class="flex items-center gap-3">
+          <img src="/images/siteoftools-black.png" alt="SiteOfTools" class="h-5 w-auto block dark:hidden" />
+          <img src="/images/siteoftools-white.png" alt="SiteOfTools" class="h-5 w-auto hidden dark:block" />
+          <span>&copy; {new Date().getFullYear()} SiteOfTools. All rights reserved.</span>
+        </div>
+
+        <nav class="flex items-center gap-6 font-medium">
+          <a href="/about" class="hover:text-neutral-900 dark:hover:text-white transition">About</a>
+          <a href="/privacy" class="hover:text-neutral-900 dark:hover:text-white transition">Privacy Policy</a>
+          <a href="/" class="hover:text-neutral-900 dark:hover:text-white transition">All Tools</a>
+        </nav>
+      </div>
       <p>© {new Date().getFullYear()} SiteOfTools.com — Pure client-side developer utilities.</p>
     </footer>
 

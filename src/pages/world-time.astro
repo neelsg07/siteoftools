@@ -1,0 +1,31 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import WorldTime from '../components/tools/dateAndTime/WorldTime.tsx';
+
+const relatedTools = ['world-time', 'epoch-converter', 'json-diff', 'unit-converter'];
+---
+
+<ToolLayout
+  title="World Time & Interactive Timezone Map — SiteOfTools"
+  description="Explore live global timezones, check city times, and compare UTC offsets on an interactive world map. 100% free client-side utility."
+  toolName="World Time Map"
+  category="Date & Time"
+  relatedToolIds={relatedTools}
+>
+  <WorldTime client:load />
+
+  <section class="mt-12 border-t border-black/10 dark:border-white/10 pt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+    <div>
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Native High-Precision Clock</h3>
+      <p>
+        All time calculations rely on your browser's V8 ECMAScript Internationalization Engine (`Intl.DateTimeFormat`), dynamically accounting for Daylight Saving Time (DST) shifts without server latency.
+      </p>
+    </div>
+    <div>
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Zero Network Overhead</h3>
+      <p>
+        Unlike external time APIs that require network calls, this tool executes entirely on your device with 0 external tracking and zero bandwidth usage after the initial load.
+      </p>
+    </div>
+  </section>
+</ToolLayout>

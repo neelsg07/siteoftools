@@ -1,0 +1,55 @@
+---
+// src/layouts/ToolLayout.astro
+import BaseLayout from './BaseLayout.astro';
+import RelatedTools from '../components/common/RelatedTools.astro';
+import type { ToolCategory } from '../data/toolsMap';
+
+interface Props {
+  title: string;
+  description: string;
+  toolName: string;
+  category: ToolCategory;
+  relatedToolIds: string[]; // Custom list of tool IDs for this specific page
+}
+
+const { title, description, toolName, category, relatedToolIds } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} activeCategory={category}>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": toolName,
+      "url": Astro.url.href,
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": description
+    })} />
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    
+    <div class="lg:col-span-3">
+      <RelatedTools relatedToolIds={relatedToolIds} />
+    </div>
+
+    <div class="lg:col-span-6 space-y-6">
+      <slot />
+    </div>
+
+    <div class="lg:col-span-3 space-y-5">
+      <div class="backdrop-blur-xl bg-white/85 dark:bg-neutral-900/80 border border-black/10 dark:border-white/10 rounded-2xl p-4 text-xs shadow-md transition-colors">
+        <h2 class="font-bold text-neutral-900 dark:text-white mb-2">About {toolName}</h2>
+        <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          {description}
+        </p>
+      </div>
+      <slot name="sidebar-right" />
+    </div>
+
+  </div>
+</BaseLayout>

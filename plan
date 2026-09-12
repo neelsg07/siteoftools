@@ -1,0 +1,100 @@
+   Developer & Code Utilities
+* JWT Debugger & Decoder: Decodes and inspects JSON Web Tokens (header, payload, signature) with expiration validation.
+* cURL to Fetch / Axios / Python Converter: Converts raw cURL commands into copy-pasteable snippets across languages.
+* Regex Tester & Visualizer: Tests regular expressions in real time with group matching and explanation highlights.
+* SQL Formatter & Minifier: Beautifies complex queries with dialect support (PostgreSQL, MySQL, SQLite, Snowflake).
+* HTML / CSS / JS Minifier & Beautifier: Compresses code payloads or restores unminified formatting.
+* Markdown Live Preview & HTML Converter: Side-by-side Markdown editor with live rendered output and export options.
+Data & Serialization
+* JSON to CSV / Excel Converter: Flattens nested JSON payloads into standard tabular formats.
+* YAML to JSON & JSON to YAML: Converts configurations seamlessly between YAML and JSON syntax.
+* XML to JSON Converter: Converts XML structures into JSON tree objects.
+* CSV to JSON / SQL Insert Statements: Generates database seed records and schema-compatible inserts.
+Security, Encoding & Cryptography
+* Base64 String & Image Converter: Encodes/decodes ASCII/UTF-8 strings and converts binary image files to Base64 data:image URIs.
+* Hash & HMAC Generator: Computes MD5, SHA-1, SHA-256, and SHA-512 cryptographic checksums.
+* UUID / GUID Generator (v4 & v7): Generates bulk unique identifiers with custom formatting (hyphens, uppercase).
+* URL Encoder / Decoder: Escapes and unescapes URI parameters and query strings.
+* Bcrypt Hash Generator & Verifier: Tests passwords against bcrypt hashes securely in-browser via WebAssembly.
+Date, Time & Scheduling
+* Epoch / Unix Timestamp Converter: Converts seconds/milliseconds to human-readable UTC and local timezones, plus reverse conversion.
+* Cron Expression Generator & Explainer: Translates 5- and 6-part cron expressions into plain English schedules with next execution dates.
+* Time Duration / Interval Calculator: Calculates business days, working hours, and differences between dates.
+Text & String Operations
+* List Comparator / Deduplicator: Finds unique items, duplicates, intersections ($A \cap B$), and differences ($A \setminus B$) across two lists.
+* Text Diff Checker: Highlights line-by-line and character-by-character text changes.
+* Case Converter: Transforms strings between camelCase, snake_case, kebab-case, PascalCase, CONSTANT_CASE, and Title Case.
+* Slugify Generator: Converts string titles into clean, URL-safe SEO slugs.
+* Lorem Ipsum & Mock Data Generator: Generates dummy placeholder text, fake names, addresses, and JSON mock models.
+Calculators & Math Utilities
+* Subnet / CIDR IP Calculator: Calculates usable host ranges, broadcast addresses, subnet masks, and IP classes for IPv4/IPv6.
+* CSS Unit Converter: Converts values across px, rem, em, vw, vh, and % based on root base sizes.
+* Byte / Storage Size Converter: Converts values across B, KB, MB, GB, TB, and TiB/GiB binary measurements.
+* Aspect Ratio & Screen Resolution Calculator: Calculates responsive dimensions, crop ratios (16:9, 4:3, 21:9), and scale multipliers.
+------
+**Developer & Code Formats**
+
+1. **JSON Formatter & Validator:** Beautifies, indents, and fixes syntax errors in messy JSON.
+2. **JSON Minifier:** Strips whitespaces and newlines for compact payloads.
+3. **JSON to TypeScript Interface:** Automatically generates TypeScript type definitions from JSON payloads.
+4. **JSON Schema Validator:** Validates JSON structures against a defined JSON Schema spec.
+5. **XML to JSON Converter:** Converts XML structures to structured JSON objects.
+6. **JSON to XML Converter:** Transforms JSON trees back to XML with custom root attributes.
+7. **YAML to JSON / JSON to YAML:** Seamless bi-directional syntax converter for configuration files.
+8. **JSON to CSV / Excel Converter:** Flattens nested JSON payloads into standard tabular datasets.
+9. **CSV to JSON Converter:** Parses CSV data into JSON arrays or key-value object lists.
+10. **cURL to Code Converter:** Converts cURL commands into native JavaScript (`fetch`/`axios`), Python (`requests`), Go, PHP, or Java.
+11. **SQL Formatter & Beautifier:** Formats complex SQL queries across MySQL, PostgreSQL, Snowflake, and SQLite dialects.
+12. **SQL Minifier:** Compacts multi-line database queries into single-line strings.
+13. **CSV to SQL Inserts:** Turns spreadsheets into database `INSERT INTO` statements with typed columns.
+14. **HTML Formatter & Beautifier:** Cleans and nests raw HTML structures.
+15. **HTML Minifier:** Compresses markup, inline styles, and scripts for faster page load times.
+16. **CSS Formatter & Beautifier:** Reorganizes unformatted CSS into clean rule sets.
+17. **CSS Minifier:** Strips comments and whitespaces from production stylesheets.
+18. **JavaScript / TypeScript Beautifier:** Restores readable indentation and formatting to scripts.
+19. **JavaScript Minifier:** Compacts source code for production payloads.
+20. **Markdown Live Preview & Editor:** Real-time side-by-side Markdown rendering with HTML export.
+
+**Security, Cryptography & Encoding**
+21. **JWT Debugger & Decoder:** Decodes and inspects JSON Web Tokens (Header, Payload, Signature) and checks expiration.
+22. **Base64 String Encoder / Decoder:** Encodes and decodes standard ASCII/UTF-8 strings.
+23. **Base64 Image Converter:** Encodes binary image files (PNG, JPEG, SVG) into Base64 `data:image` strings and vice versa.
+24. **URL Encoder / Decoder:** Encodes and decodes special URI parameters and query strings.
+25. **HTML Entity Encoder / Decoder:** Escapes characters like `<`, `>`, `&`, `"`, and quotes for safe rendering.
+26. **UUID / GUID Generator:** Generates bulk UUID v4 (random) and UUID v7 (time-ordered) identifiers.
+27. **Hash Generator:** Computes MD5, SHA-1, SHA-256, and SHA-512 cryptographic checksums.
+28. **HMAC Generator:** Computes keyed-hash message authentication codes using SHA-256/SHA-512 with secret keys.
+29. **Bcrypt Hash & Verifier:** Hashes passwords with salt rounds and verifies plaintext strings against existing hashes in-browser.
+30. **Password & Passphrase Generator:** Generates cryptographically secure random passwords with customizable symbol, length, and entropy rules.
+31. **Hex to Text / Text to Hex:** Converts raw hexadecimal strings to ASCII/UTF-8 and vice versa.
+32. **Binary to Text / Text to Binary:** Translates raw 8-bit binary strings to human-readable text.
+
+**Text, String & Content Operations**
+33. **Text Diff Checker:** Compares two blocks of text with line-by-line and character-level change highlights.
+34. **List Comparator & Deduplicator:** Finds duplicates, intersection ($A \cap B$), difference ($A \setminus B$), and symmetric differences across two lists.
+35. **Case Converter:** Converts strings between `camelCase`, `snake_case`, `kebab-case`, `PascalCase`, `CONSTANT_CASE`, and `Title Case`.
+36. **String Slugifier:** Turns article titles and headlines into clean, URL-safe SEO slugs.
+37. **Word & Character Counter:** Real-time analyzer for word count, character count (with/without spaces), reading time, and keyword density.
+38. **Lorem Ipsum Generator:** Produces customizable placeholder dummy text by words, sentences, or paragraphs.
+39. **Mock Data Generator:** Generates fake mock datasets (names, emails, phone numbers, addresses, UUIDs) in JSON or CSV.
+40. **Regex Tester & Visualizer:** Evaluates regular expressions in real time with capture group breakdown and syntax matching.
+41. **Duplicate Line Remover:** Strips repeated lines from text lists while preserving original order.
+42. **Sort Lines Tool:** Alphabetically or numerically sorts lists ascending/descending with case-sensitivity options.
+
+**Date, Time & Scheduling**
+43. **Epoch / Unix Timestamp Converter:** Converts seconds/milliseconds to human-readable UTC and local timezones, plus reverse calculation.
+44. **Cron Expression Generator & Explainer:** Translates cron syntax into plain-English schedules and shows the next 5 execution timestamps.
+45. **Date Difference / Interval Calculator:** Calculates days, hours, and business working days between two dates.
+46. **Time Duration Adder / Subtractor:** Adds or subtracts days, hours, minutes, and seconds to any starting timestamp.
+
+**Calculators & Conversions**
+47. **CIDR / Subnet IP Calculator:** Calculates usable host IP ranges, broadcast IPs, and netmasks for IPv4/IPv6 blocks.
+48. **CSS Unit Converter:** Converts values between `px`, `rem`, `em`, `vw`, `vh`, and `%` based on root font settings.
+49. **Storage / Byte Size Converter:** Converts values across B, KB, MB, GB, TB, PB, and binary units (KiB, MiB, GiB).
+50. **Aspect Ratio & Screen Resolution Calculator:** Calculates dimensions, crop ratios (16:9, 4:3, 21:9), and scale multipliers.
+51. **Color Code Converter:** Bi-directionally converts between HEX, RGB, RGBA, HSL, HSLA, and CMYK with a live color picker.
+52. **QR Code Generator:** Generates downloadable QR codes for URLs, WiFi credentials, vCards, and plain text.
+53. **SVG to PNG / JPEG Converter:** Renders vector SVG files directly into high-res raster formats on a browser canvas.
+54. **HTTP Status Code Lookup:** Searchable cheat-sheet explaining 1xx, 2xx, 3xx, 4xx, and 5xx response headers and meanings.
+
+Which tool from this list would you like to implement next in your tools catalog? 

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="About Us — SiteOfTools" 
+  description="High-performance, client-side, privacy-first utilities for developers and creators."
+>
+  <div class="max-w-3xl mx-auto px-4 py-12 text-neutral-800 dark:text-neutral-200">
+    <div class="backdrop-blur-xl bg-white/90 dark:bg-neutral-900/80 border border-black/10 dark:border-white/10 rounded-2xl p-6 sm:p-10 shadow-xl space-y-8 text-xs sm:text-sm leading-relaxed">
+      
+      <header class="border-b border-black/10 dark:border-white/10 pb-5">
+        <h1 class="text-2xl font-bold text-neutral-900 dark:text-white">About SiteOfTools</h1>
+        <p class="text-neutral-500 mt-1">High-performance utility suite built for developers.</p>
+      </header>
+
+      <section class="space-y-3">
+        <h2 class="text-base font-bold text-neutral-900 dark:text-white">Our Mission</h2>
+        <p class="text-neutral-600 dark:text-neutral-400 leading-loose">
+          Every developer frequently needs quick single-purpose tools: diffing API responses, comparing ID arrays, calculating time zones, or debugging tokens. Most existing online utility sites are cluttered with intrusive ads, broken popups, slow server-side redirects, and questionable privacy practices.
+        </p>
+        <p class="text-neutral-600 dark:text-neutral-400 leading-loose">
+          SiteOfTools was created to provide a minimalist, lightning-fast alternative built on modern web standards with zero backend tracking.
+        </p>
+      </section>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+        <div class="p-4 rounded-xl bg-neutral-100 dark:bg-neutral-800/60 border border-black/5 dark:border-white/5 space-y-1">
+          <span class="font-bold text-neutral-900 dark:text-white block text-sm">100% In-Browser</span>
+          <p class="text-neutral-500 text-xs">All calculations run locally using modern V8 JavaScript and Web APIs.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-neutral-100 dark:bg-neutral-800/60 border border-black/5 dark:border-white/5 space-y-1">
+          <span class="font-bold text-neutral-900 dark:text-white block text-sm">Zero Latency</span>
+          <p class="text-neutral-500 text-xs">Pre-compiled static pages hosted across global Cloudflare edge points.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-neutral-100 dark:bg-neutral-800/60 border border-black/5 dark:border-white/5 space-y-1">
+          <span class="font-bold text-neutral-900 dark:text-white block text-sm">Clean Design</span>
+          <p class="text-neutral-500 text-xs">Adaptive dark/light interface designed to fit distraction-free workflows.</p>
+        </div>
+      </div>
+
+      <section class="space-y-3 border-t border-black/10 dark:border-white/10 pt-6">
+        <h2 class="text-base font-bold text-neutral-900 dark:text-white">Engineering Stack</h2>
+        <p class="text-neutral-600 dark:text-neutral-400 leading-loose">
+          The project is engineered with <strong class="text-neutral-900 dark:text-white">Astro</strong> for static generation, <strong class="text-neutral-900 dark:text-white">React</strong> for interactive tool islands, and <strong class="text-neutral-900 dark:text-white">Tailwind CSS v4</strong> for styling.
+        </p>
+      </section>
+
+    </div>
+  </div>
+</BaseLayout>

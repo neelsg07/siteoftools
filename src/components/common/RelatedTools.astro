@@ -1,0 +1,45 @@
+---
+// src/components/common/RelatedTools.astro
+import { getRelatedTools } from '../../data/toolsMap';
+
+interface Props {
+  relatedToolIds: string[];
+}
+
+const { relatedToolIds } = Astro.props;
+const tools = getRelatedTools(relatedToolIds);
+const currentPath = Astro.url.pathname;
+---
+
+<aside class="backdrop-blur-xl bg-white/85 dark:bg-neutral-900/80 border border-black/10 dark:border-white/10 rounded-2xl p-4 shadow-md transition-colors">
+  <div class="text-[11px] font-bold tracking-wider text-neutral-500 uppercase mb-3 px-2">
+    Related Tools
+  </div>
+
+  <nav class="space-y-1 text-xs font-medium">
+    {tools.map((tool) => {
+      const isActive = currentPath === tool.href || currentPath === `${tool.href}/`;
+      const isReady = tool.status === 'ready';
+
+      return (
+        <a
+          href={isReady ? tool.href : '#'}
+          class={`flex items-center justify-between px-3 py-2 rounded-xl transition ${
+            isActive
+              ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 font-bold shadow-sm'
+              : isReady
+              ? 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200/60 dark:hover:bg-white/5'
+              : 'text-neutral-400 dark:text-neutral-600 opacity-60 cursor-not-allowed'
+          }`}
+        >
+          <span>{tool.name}</span>
+          {isActive ? (
+            <span class="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-600"></span>
+          ) : !isReady ? (
+            <span class="text-[9px] font-mono uppercase bg-neutral-200 dark:bg-neutral-800 px-1.5 py-0.5 rounded text-neutral-500">Soon</span>
+          ) : null}
+        </a>
+      );
+    })}
+  </nav>
+</aside>

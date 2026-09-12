@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Privacy Policy — SiteOfTools" 
+  description="Learn about SiteOfTools' strict in-browser, client-side data privacy commitment. Zero tracking, zero storage."
+>
+  <div class="max-w-3xl mx-auto px-4 py-12 text-neutral-800 dark:text-neutral-200">
+    <div class="backdrop-blur-xl bg-white/90 dark:bg-neutral-900/80 border border-black/10 dark:border-white/10 rounded-2xl p-6 sm:p-10 shadow-xl space-y-8 text-xs sm:text-sm leading-relaxed">
+      
+      <header class="border-b border-black/10 dark:border-white/10 pb-5">
+        <h1 class="text-2xl font-bold text-neutral-900 dark:text-white">Privacy Policy</h1>
+        <p class="text-neutral-500 mt-1">Last updated: 2026</p>
+      </header>
+
+      <section class="space-y-3">
+        <h2 class="text-base font-bold text-neutral-900 dark:text-white">1. Client-Side Execution Guarantee</h2>
+        <p class="text-neutral-600 dark:text-neutral-400 leading-loose">
+          SiteOfTools operates on a strict zero-retention, client-side architecture. When you input data into tools like JSON Diff, Text Diff, List Comparator, or Epoch Converters, that data is processed entirely within your device's browser sandbox using local JavaScript.
+        </p>
+        <p class="text-neutral-600 dark:text-neutral-400 leading-loose">
+          Your files, strings, tokens, and payloads are never transmitted to our servers, logged to disk, or exposed to third parties.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base font-bold text-neutral-900 dark:text-white">2. Local Storage & Preferences</h2>
+        <p class="text-neutral-600 dark:text-neutral-400 leading-loose">
+          We use modern browser APIs such as <code>localStorage</code> strictly to persist non-sensitive user interface preferences (such as your chosen theme—light or dark mode—and pinned world clocks). This data never leaves your personal device.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base font-bold text-neutral-900 dark:text-white">3. Network & Edge Hosting</h2>
+        <p class="text-neutral-600 dark:text-neutral-400 leading-loose">
+          Our static frontend assets are distributed globally via Cloudflare Pages. Standard edge network telemetry (such as IP addresses and request user-agent headers) may be processed transiently by Cloudflare strictly for DDOS mitigation, security verification, and performance routing.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base font-bold text-neutral-900 dark:text-white">4. Third-Party Dependencies</h2>
+        <p class="text-neutral-600 dark:text-neutral-400 leading-loose">
+          We maintain a zero-bloat standard. We do not inject tracking pixels, invasive session-recording tools, or cross-site fingerprinting scripts.
+        </p>
+      </section>
+
+      <section class="space-y-3 border-t border-black/10 dark:border-white/10 pt-6">
+        <h2 class="text-base font-bold text-neutral-900 dark:text-white">Contact</h2>
+        <p class="text-neutral-600 dark:text-neutral-400 leading-loose">
+          If you have inquiries regarding privacy practices on this website, contact us via the open repository or through our developer channels.
+        </p>
+      </section>
+
+    </div>
+  </div>
+</BaseLayout>
