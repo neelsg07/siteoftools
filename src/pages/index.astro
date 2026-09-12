@@ -1,31 +1,56 @@
 ---
+// src/pages/index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
-import JsonDiffTool from '../components/tools/JsonDiffTool.tsx';
+import { TOOL_REGISTRY } from '../data/toolsMap';
+
+const tools = Object.values(TOOL_REGISTRY);
 ---
 
 <BaseLayout
-  title="SiteOfTools — Fast, Private In-Browser Developer Utilities"
-  description="Compare JSON, format payloads, and convert formats with zero server tracking. 100% free client-side developer utility suite."
+  title="SiteOfTools — Fast, Private In-Browser Developer Utility Suite"
+  description="Collection of fast, lightweight developer utilities running 100% client-side with zero data retention."
   activeCategory="Developer"
 >
-  <!-- Main Interactive Island -->
-  <JsonDiffTool client:load />
+  <div class="space-y-6">
+    <div class="flex items-center justify-between pb-2 border-b border-black/10 dark:border-white/10">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-neutral-500">Popular Tools</h2>
+      <span class="text-xs text-neutral-500 font-mono">{tools.length} Tools Available</span>
+    </div>
 
-  <!-- Below-the-fold Static SEO Content -->
-  <section class="mt-16 border-t border-white/10 pt-10 grid grid-cols-1 md:grid-cols-2 gap-8 text-xs text-slate-400 leading-relaxed">
-    <div>
-      <h2 class="text-sm font-semibold text-white mb-2">How Does Client-Side JSON Diff Work?</h2>
-      <p>
-        SiteOfTools compares JSON structures using character-by-character and line-by-line diffing algorithms. 
-        Unlike traditional online converters that upload your data to remote backends, all operations run on your device's V8 JavaScript engine.
-      </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {tools.map((tool) => (
+        <a
+          href={tool.status === 'ready' ? tool.href : '#'}
+          class={`group backdrop-blur-xl bg-white/80 dark:bg-neutral-900/80 border border-black/10 dark:border-white/10 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between ${
+            tool.status === 'coming-soon' ? 'opacity-60 cursor-not-allowed' : 'hover:border-black dark:hover:border-white'
+          }`}
+        >
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-lg font-mono p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white">
+                {tool.icon || '< >'}
+              </span>
+              <span class={`text-[10px] font-mono px-2 py-0.5 rounded-full border ${
+                tool.status === 'ready'
+                  ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/20'
+                  : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-500 border-black/5 dark:border-white/5'
+              }`}>
+                {tool.status === 'ready' ? 'Ready' : 'Coming Soon'}
+              </span>
+            </div>
+            <h3 class="font-bold text-neutral-900 dark:text-white group-hover:text-black dark:group-hover:text-neutral-100 mb-1">
+              {tool.name}
+            </h3>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              {tool.description}
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-black/5 dark:border-white/5 flex items-center justify-between text-[11px] font-medium text-neutral-500">
+            <span>{tool.category}</span>
+            <span class="group-hover:translate-x-0.5 transition-transform">→</span>
+          </div>
+        </a>
+      ))}
     </div>
-    <div>
-      <h2 class="text-sm font-semibold text-white mb-2">Data Privacy & Zero Logs</h2>
-      <p>
-        We do not maintain databases or server-side logging mechanisms. Your JSON payloads, authentication tokens, 
-        and confidential debug logs remain secure inside your browser session.
-      </p>
-    </div>
-  </section>
+  </div>
 </BaseLayout>

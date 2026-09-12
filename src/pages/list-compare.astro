@@ -1,0 +1,119 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import ListCompareTool from '../components/tools/text/ListCompareTool';
+
+const relatedTools = ['list-compare', 'text-diff', 'json-diff', 'base64-tool'];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many lists can I compare at once?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool supports comparing between 2 and 5 lists simultaneously on demand. You can inspect exact intersections across all lists, unique items per individual list, and full set unions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are duplicate items handled within a list?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each list is automatically deduplicated using JavaScript Set structures before computing set operations. You can also view and isolate duplicate lines for any individual list."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my text data stored or sent to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All set difference operations, trimming, and comparisons execute 100% client-side in your local browser. No data is stored, cached, or transmitted over any network."
+      }
+    }
+  ]
+};
+---
+
+<ToolLayout
+  title="List Compare Online — Compare 2 to 5 Lists & Find Differences"
+  description="Compare two to five text lists online. Find common items, intersections, unique entries, differences, and view interactive Venn diagrams with zero server tracking."
+  toolName="List Compare"
+  category="Text"
+  relatedToolIds={relatedTools}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <ListCompareTool client:load />
+
+  <article class="mt-16 border-t border-black/10 dark:border-white/10 pt-10 text-neutral-800 dark:text-neutral-200 space-y-8 text-xs leading-relaxed">
+    <header class="space-y-3">
+      <h2 class="text-base font-bold text-neutral-900 dark:text-white">
+        Online Multi-List Comparison & Set Operations
+      </h2>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        Data reconciliation is a fundamental challenge across database management, email marketing, analytics, and software testing. When managing multiple spreadsheets, email registries, ID lists, or raw query results, finding what exists across datasets or isolating entries exclusive to one source requires complex spreadsheets or custom shell scripts. Our online List Compare tool simplifies this into an instant, browser-based workflow capable of comparing up to five distinct lists simultaneously with zero server processing latency.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">1. Universal Intersection</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Identify items that exist simultaneously across all active lists (A &cap; B &cap; C &hellip;), perfect for finding overlapping user accounts or common database keys.</p>
+      </div>
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">2. Exclusive Differences</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Isolate entries that exist exclusively in a single list and nowhere else {'(A \\ all others)'}, making churn identification and gap analysis effortless.</p>
+      </div>
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">3. Visual Venn Diagrams</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Gain instant visual comprehension of overlapping sets using an automatically generated 2-set or 3-set SVG Venn Diagram that updates in real time as you edit lines.</p>
+      </div>
+    </div>
+
+    <section class="space-y-4">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        Practical Use Cases for Multi-List Comparison
+      </h3>
+      <ul class="list-disc pl-5 space-y-2 text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        <li><strong>Email Marketing & Lead Lists:</strong> Compare customer newsletter subscribers against opt-out suppression lists and active CRM leads to prevent accidental email dispatches.</li>
+        <li><strong>Database Migration & Reconciliation:</strong> Validate that exported IDs from a legacy SQL database match newly seeded records in modern document stores like MongoDB or PostgreSQL.</li>
+        <li><strong>Inventory & SKU Auditing:</strong> Compare warehouse inventory logs across multiple branches to detect unstocked items, overstocked SKUs, or discontinued products.</li>
+        <li><strong>SEO & Keyword Gap Analysis:</strong> Compare keyword ranking datasets from multiple competitor domains to isolate shared rankings versus untapped organic opportunities.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-3">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        High-Performance Client-Side Architecture
+      </h3>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        Traditional online list comparison tools upload raw line arrays to remote cloud servers, creating potential bottlenecks and leaking sensitive corporate data like customer emails and internal IDs. 
+      </p>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        SiteOfTools operates entirely in-browser using native JavaScript <code>Set</code> hashing algorithms that deliver O(1) lookup speeds.
+      </p>
+    </section>
+
+    <section class="space-y-4 border-t border-black/5 dark:border-white/5 pt-8">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        Frequently Asked Questions
+      </h3>
+      <dl class="space-y-4">
+        <div class="bg-neutral-50 dark:bg-neutral-900/40 p-4 rounded-lg">
+          <dt class="font-bold text-neutral-900 dark:text-white">Does the tool support case-insensitive comparison?</dt>
+          <dd class="text-neutral-600 dark:text-neutral-400 mt-1.5 leading-relaxed">
+            Yes. By default, comparison is case-insensitive so that "Apple" and "apple" match. You can toggle "Case Sensitive" on with one click if exact casing is required for keys or identifiers.
+          </dd>
+        </div>
+        <div class="bg-neutral-50 dark:bg-neutral-900/40 p-4 rounded-lg">
+          <dt class="font-bold text-neutral-900 dark:text-white">Can I export the comparison results?</dt>
+          <dd class="text-neutral-600 dark:text-neutral-400 mt-1.5 leading-relaxed">
+            Yes. Once you select any comparison tab (such as "In All Lists" or "Only List A"), you can instantly copy the output to your clipboard or download it directly as a clean <code>.txt</code> file.
+          </dd>
+        </div>
+      </dl>
+    </section>
+  </article>
+</ToolLayout>
