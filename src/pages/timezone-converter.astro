@@ -1,0 +1,119 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import TimezoneConverterTool from '../components/tools/dateAndTime/TimezoneConverterTool';
+
+const relatedTools = ['timezone-converter', 'world-time', 'epoch-converter', 'list-compare'];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the online Timezone Converter handle Daylight Saving Time (DST)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool uses your browser's native Internationalization API (Intl), which references the official IANA Time Zone Database. Daylight Saving Time transitions are resolved automatically based on the historical and scheduled rules for the exact calendar date selected."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I paste Unix epoch timestamps into the timezone converter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The auto-detection parser accepts raw numeric timestamps in both seconds (10 digits) and milliseconds (13 digits), converting them into target regional timezones instantly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my date or time data uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All timezone calculations and string conversions execute 100% client-side in your local web browser. Your inputs are never stored, transmitted, or logged."
+      }
+    }
+  ]
+};
+---
+
+<ToolLayout
+  title="Timezone Converter Online — Convert Time Across Global Zones"
+  description="Convert dates and times between any global timezones with smart timestamp auto-detection, standard formats, and local browser timezone detection."
+  toolName="Timezone Converter"
+  category="Date & Time"
+  relatedToolIds={relatedTools}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <TimezoneConverterTool client:load />
+
+  <article class="mt-16 border-t border-black/10 dark:border-white/10 pt-10 text-neutral-800 dark:text-neutral-200 space-y-8 text-xs leading-relaxed">
+    <header class="space-y-3">
+      <h2 class="text-base font-bold text-neutral-900 dark:text-white">
+        Online Global Timezone Converter & Scheduler
+      </h2>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        Coordinating meetings, scheduled cloud tasks, and international releases across different time zones is complicated by daylight saving shifts, non-standard half-hour offsets, and cross-day boundary rollovers. Our online Timezone Converter simplifies cross-timezone scheduling by offering instant bi-directional conversion across hundreds of IANA regional zones. With smart string auto-detection and standard format options, developers, remote teams, and travelers can align international times without manual offset math.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">1. Smart Auto-Detection</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Paste raw timestamps in ISO 8601, RFC 2822, SQL, or Unix epoch formats. The engine parses the date components automatically without requiring manual formatting.</p>
+      </div>
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">2. IANA Database Precision</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Powered by the browser's native Internationalization API, ensuring accurate handling of complex regional boundaries, half-hour offsets (such as IST and ACST), and Daylight Saving Time (DST).</p>
+      </div>
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">3. Standard Output Presets</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Convert dates directly into formats ready for copy-pasting into codebases, including ISO 8601, RFC 2822, SQL datetime records, and 12/24-hour schedules.</p>
+      </div>
+    </div>
+
+    <section class="space-y-4">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        Common Practical Applications
+      </h3>
+      <ul class="list-disc pl-5 space-y-2 text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        <li><strong>Distributed Remote Team Syncs:</strong> Calculate meeting times between headquarters and remote engineers across London, San Francisco, Tokyo, and Bengaluru without confusion over day boundaries.</li>
+        <li><strong>Server Log & Audit Trail Correlation:</strong> Translate server event timestamps recorded in UTC into a developer's local workstation time to match production anomalies against user reports.</li>
+        <li><strong>Cron Job & Cloud Task Scheduling:</strong> Verify that serverless cron functions scheduled in UTC trigger during target business hours in specific geographic jurisdictions.</li>
+        <li><strong>Travel & Flight Coordination:</strong> Double-check flight departure times and arrival schedules across differing hemispheres to avoid missed connections.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-3">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        Client-Side Execution & Total Privacy
+      </h3>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        Traditional timezone calculators often send your dates and queries to a server, collecting user IP data and logging scheduling queries. 
+      </p>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        SiteOfTools processes all timezone math strictly in memory using your web browser's V8 JavaScript engine. Your timestamps and location preferences remain confidential on your device, with zero network tracking.
+      </p>
+    </section>
+
+    <section class="space-y-4 border-t border-black/5 dark:border-white/5 pt-8">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        Frequently Asked Questions
+      </h3>
+      <dl class="space-y-4">
+        <div class="bg-neutral-50 dark:bg-neutral-900/40 p-4 rounded-lg">
+          <dt class="font-bold text-neutral-900 dark:text-white">What does UTC mean?</dt>
+          <dd class="text-neutral-600 dark:text-neutral-400 mt-1.5 leading-relaxed">
+            Coordinated Universal Time (UTC) is the primary time standard by which the world regulates clocks and time. It is not adjusted for Daylight Saving Time and serves as the universal reference point from which all regional time zones are offset (e.g., UTC+5:30 or UTC-8).
+          </dd>
+        </div>
+        <div class="bg-neutral-50 dark:bg-neutral-900/40 p-4 rounded-lg">
+          <dt class="font-bold text-neutral-900 dark:text-white">Why are some timezones 30 or 45 minutes offset?</dt>
+          <dd class="text-neutral-600 dark:text-neutral-400 mt-1.5 leading-relaxed">
+            While most time zones differ from UTC by whole hours, several regions adopt half-hour or 45-minute offsets for solar or geopolitical reasons. Examples include India (UTC+5:30), Iran (UTC+3:30), Nepal (UTC+5:45), and parts of Australia (UTC+9:30). Our tool handles these fractional offsets accurately.
+          </dd>
+        </div>
+      </dl>
+    </section>
+  </article>
+</ToolLayout>

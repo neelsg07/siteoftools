@@ -1,0 +1,121 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import EpochConverterTool from '../components/tools/dateAndTime/EpochConverterTool';
+
+const relatedTools = ['epoch-converter', 'world-time', 'json-formatter', 'list-compare'];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is an Epoch or Unix timestamp?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Unix epoch is the number of seconds that have elapsed since January 1, 1970, at 00:00:00 UTC, not counting leap seconds. It provides a universal, timezone-agnostic standard for computers to record and sort points in time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the tool auto-detect seconds vs milliseconds?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standard Unix timestamps in seconds are currently 10 digits long (e.g., 1700000000), whereas millisecond timestamps (used by JavaScript Date objects and Java) are 13 digits long. The tool inspects string length to determine unit precision automatically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What will happen in the Year 2038 problem (Y2038)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On January 19, 2038, 32-bit signed integers will exceed their maximum capacity of 2,147,483,647 seconds and wrap around to negative values. Modern 64-bit systems and web browsers have resolved this issue, supporting timestamps billions of years into the future."
+      }
+    }
+  ]
+};
+---
+
+<ToolLayout
+  title="Epoch Converter — Unix Timestamp Converter & Live Clock"
+  description="Convert Unix timestamps to human-readable UTC and local dates. Features auto-detection for seconds & milliseconds, custom date formatting, and live clock."
+  toolName="Epoch Converter"
+  category="Date & Time"
+  relatedToolIds={relatedTools}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <EpochConverterTool client:load />
+
+  <article class="mt-16 border-t border-black/10 dark:border-white/10 pt-10 text-neutral-800 dark:text-neutral-200 space-y-8 text-xs leading-relaxed">
+    <header class="space-y-3">
+      <h2 class="text-base font-bold text-neutral-900 dark:text-white">
+        Online Unix & Epoch Timestamp Converter
+      </h2>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        Unix epoch time (also referred to as POSIX time) is the foundational temporal standard across operating systems, distributed databases, cloud logs, and RESTful APIs. By calculating elapsed seconds since the arbitrary epoch boundary of <strong>January 1, 1970 00:00:00 UTC</strong>, computing systems avoid the complexities of daylight saving offsets, time zone boundaries, and international calendar shifts. Our online Epoch Converter provides an instantaneous bi-directional interface for translating raw epoch digits into localized timestamps, standard ISO 8601 strings, and SQL datetime formats.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">1. Smart Auto-Detection</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Pasted values are dynamically identified as seconds (10 digits) or milliseconds (13 digits), preventing the common 1000x multiplication errors seen in developer logs.</p>
+      </div>
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">2. Dual Timezone Clarity</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Simultaneously renders global Greenwich Mean Time (UTC) and your specific local machine timezone, clearly labeled with IANA region coordinates to eliminate ambiguity.</p>
+      </div>
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">3. Standard Export Presets</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Quickly extract converted timestamps across ISO 8601, RFC 2822 HTTP headers, and SQL-compatible datetime strings ready for production queries.</p>
+      </div>
+    </div>
+
+    <section class="space-y-4">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        Seconds vs. Milliseconds Across Programming Languages
+      </h3>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        Different backend environments, programming languages, and database engines default to varying levels of temporal precision:
+      </p>
+      <ul class="list-disc pl-5 space-y-2 text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        <li><strong>Seconds (10 Digits):</strong> Standard across Python (<code>time.time()</code>), PHP (<code>time()</code>), Ruby, Go, MySQL (<code>UNIX_TIMESTAMP()</code>), and Linux bash scripts.</li>
+        <li><strong>Milliseconds (13 Digits):</strong> The default resolution for JavaScript (<code>Date.now()</code>), Java (<code>System.currentTimeMillis()</code>), and MongoDB ObjectId timestamp extractions.</li>
+        <li><strong>Microseconds / Nanoseconds:</strong> Utilized in high-frequency trading engines, distributed tracing tools (like OpenTelemetry), and Go's <code>time.Now().UnixNano()</code>.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-3">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        Zero Latency & Client-Side Privacy
+      </h3>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        Developers frequently evaluate timestamps originating from confidential audit trails, user authentication sessions, or transaction logs. Many legacy timestamp websites dispatch queries back to remote servers for date formatting, leaking internal timestamps and IP coordinates.
+      </p>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        SiteOfTools executes all epoch calculations locally in your browser's JavaScript runtime. Your timestamps never leave your machine, providing total privacy and zero-latency conversion.
+      </p>
+    </section>
+
+    <section class="space-y-4 border-t border-black/5 dark:border-white/5 pt-8">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        Frequently Asked Questions
+      </h3>
+      <dl class="space-y-4">
+        <div class="bg-neutral-50 dark:bg-neutral-900/40 p-4 rounded-lg">
+          <dt class="font-bold text-neutral-900 dark:text-white">Why does my converted date display 1970?</dt>
+          <dd class="text-neutral-600 dark:text-neutral-400 mt-1.5 leading-relaxed">
+            If a timestamp in seconds is mistakenly interpreted as milliseconds, the value will resolve to early January 1970. Our auto-detection feature identifies 10-digit strings and multiplies by 1,000 to yield the correct modern date.
+          </dd>
+        </div>
+        <div class="bg-neutral-50 dark:bg-neutral-900/40 p-4 rounded-lg">
+          <dt class="font-bold text-neutral-900 dark:text-white">Does Unix time account for leap seconds?</dt>
+          <dd class="text-neutral-600 dark:text-neutral-400 mt-1.5 leading-relaxed">
+            Strict POSIX standards do not encode leap seconds; every Unix day is modeled as having exactly 86,400 seconds. When leap seconds are inserted by the International Earth Rotation Service, systems typically use leap second smearing to align with UTC.
+          </dd>
+        </div>
+      </dl>
+    </section>
+  </article>
+</ToolLayout>

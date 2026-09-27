@@ -1,0 +1,119 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import JsonFormatterTool from '../components/tools/json/JsonFormatterTool';
+
+const relatedTools = ['json-formatter', 'json-diff', 'text-diff', 'base64-tool'];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I format and validate JSON online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paste your raw or minified JSON text into the input panel. The tool automatically evaluates the payload against standard RFC 8259 syntax specifications, pinpoints parse errors, and generates indented output in real time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this tool send my JSON data to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All formatting, tree node rendering, minification, and syntax parsing execute strictly client-side inside your browser sandbox. Your tokens, API credentials, and payloads never touch a network or server."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the JSON Tree Visualizer mode?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Tree Visualizer renders JSON structures as collapsible, hierarchical nodes with visual data-type badges for strings, booleans, arrays, and nested objects, making deeply nested documents easy to inspect."
+      }
+    }
+  ]
+};
+---
+
+<ToolLayout
+  title="JSON Formatter & Validator — Beautify & Visualize JSON Online"
+  description="Free online JSON Formatter, Validator, and Interactive Tree Visualizer. Prettify messy JSON, inspect syntax errors, minify payloads, and explore nested objects with 100% in-browser privacy."
+  toolName="JSON Formatter"
+  category="Developer"
+  relatedToolIds={relatedTools}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <JsonFormatterTool client:load />
+
+  <article class="mt-16 border-t border-black/10 dark:border-white/10 pt-10 text-neutral-800 dark:text-neutral-200 space-y-8 text-xs leading-relaxed">
+    <header class="space-y-3">
+      <h2 class="text-base font-bold text-neutral-900 dark:text-white">
+        Online JSON Formatter, Validator, and Visualizer
+      </h2>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        JSON (JavaScript Object Notation) is the ubiquitous standard for web APIs, configuration files, NoSQL databases, and cloud service architectures. However, raw server responses and production payloads are frequently minified into dense, single-line strings without line breaks or readable indentation. Our online JSON Formatter and Validator provides an instant, distraction-free environment to prettify, validate, minify, and interactively explore complex JSON trees directly within your browser.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">1. Instant Formatting</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Transform unformatted, compacted strings into clean, indented JSON using 2-space, 4-space, or 8-space indentation hierarchies for effortless reading.</p>
+      </div>
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">2. Real-Time Validation</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Catch missing commas, unescaped quotes, trailing delimiters, and mismatched brackets with exact character and line error diagnostics.</p>
+      </div>
+      <div class="p-5 rounded-xl bg-neutral-100/70 dark:bg-neutral-900/60 border border-black/5 dark:border-white/5 space-y-2">
+        <span class="font-bold text-neutral-900 dark:text-white block text-sm">3. Interactive Tree View</span>
+        <p class="text-neutral-600 dark:text-neutral-400">Explore massive nested datasets with a collapsible object tree that highlights string primitives, numbers, booleans, arrays, and null values.</p>
+      </div>
+    </div>
+
+    <section class="space-y-4">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        Key Features for Software Engineers & API Developers
+      </h3>
+      <ul class="list-disc pl-5 space-y-2 text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        <li><strong>Strict RFC 8259 Compliance:</strong> Validates JSON structures against standard Internet engineering specifications to guarantee compatibility across backend runtimes including Node.js, Python, Java, and Go.</li>
+        <li><strong>One-Click Production Minification:</strong> Instantly remove unnecessary whitespaces, line breaks, and tabs to produce compacted payloads ready for network transfer or database storage.</li>
+        <li><strong>Collapsible Node Exploration:</strong> Drill down into deeply nested multi-megabyte payloads without endless vertical scrolling by expanding or collapsing individual object keys and array elements.</li>
+        <li><strong>Direct Clipboard Integration:</strong> Copy formatted code or minified strings with a single keystroke to streamline your development workflow.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-3">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        Zero Data Retention & Client-Side Privacy
+      </h3>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        Developers frequently work with confidential API payloads containing OAuth bearer tokens, customer personally identifiable information (PII), or proprietary database documents. Many legacy online formatting websites route your input through remote servers, creating compliance risks under GDPR, CCPA, and enterprise security policies.
+      </p>
+      <p class="text-neutral-600 dark:text-neutral-400 text-[13px] leading-loose">
+        SiteOfTools operates under a strict privacy-first model: parsing and tree rendering occur entirely inside your browser using native JavaScript Web APIs. Your payloads are never sent over external networks, logged to databases, or exposed to third-party scripts.
+      </p>
+    </section>
+
+    <section class="space-y-4 border-t border-black/5 dark:border-white/5 pt-8">
+      <h3 class="text-sm font-bold text-neutral-900 dark:text-white">
+        Frequently Asked Questions
+      </h3>
+      <dl class="space-y-4">
+        <div class="bg-neutral-50 dark:bg-neutral-900/40 p-4 rounded-lg">
+          <dt class="font-bold text-neutral-900 dark:text-white">Why does JSON validation fail on trailing commas?</dt>
+          <dd class="text-neutral-600 dark:text-neutral-400 mt-1.5 leading-relaxed">
+            Unlike JavaScript object literals, the formal JSON specification (RFC 8259) prohibits trailing commas after the final key-value pair in an object or array. Removing trailing commas resolves this validation error immediately.
+          </dd>
+        </div>
+        <div class="bg-neutral-50 dark:bg-neutral-900/40 p-4 rounded-lg">
+          <dt class="font-bold text-neutral-900 dark:text-white">Can I compare two JSON files to view differences?</dt>
+          <dd class="text-neutral-600 dark:text-neutral-400 mt-1.5 leading-relaxed">
+            Yes! If you need to inspect modifications, additions, or deletions across two distinct JSON payloads, use our dedicated <a href="/json-diff" class="text-emerald-600 dark:text-emerald-400 underline hover:text-emerald-700">JSON Diff Tool</a> for side-by-side highlighting.
+          </dd>
+        </div>
+      </dl>
+    </section>
+  </article>
+</ToolLayout>
